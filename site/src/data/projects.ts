@@ -223,4 +223,196 @@ export const projects: Project[] = [
       ],
     },
   },
+
+  // ── 08 Image Processing ───────────────────────────────────────────────────────
+  {
+    slug: '08-image-processing-service',
+    number: 8,
+    title: 'Image Processing Service',
+    difficulty: 'Intermediate',
+    tooling: 'AWS SAM',
+    description: 'Auto-tag uploaded images using Rekognition — S3 upload triggers Lambda which calls the vision API.',
+    services: ['S3', 'Lambda', 'Rekognition'],
+    goal: 'Auto-tag uploaded images using managed computer vision. When an image lands in S3, a Lambda function calls Rekognition DetectLabels and writes the resulting tags back to the object metadata.',
+    whatYouLearn: [
+      'Rekognition DetectLabels API — confidence scores and label hierarchy',
+      'S3 object metadata as a lightweight tag store',
+      'Async event-driven processing vs. synchronous request/response',
+      'IAM least-privilege for cross-service Lambda calls',
+    ],
+    diagram: {
+      nodes: [
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
+        { id: 's3', type: 'service', position: { x: 220, y: 120 }, data: { label: 'S3', icon: SiAmazons3, category: 'storage' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: SiAwslambda, category: 'compute' } },
+        { id: 'rekog', type: 'service', position: { x: 660, y: 120 }, data: { label: 'Rekognition', icon: SiAmazonaws, category: 'compute' } },
+      ],
+      edges: [
+        { id: 'e1', source: 'client', target: 's3', label: 'upload image' },
+        { id: 'e2', source: 's3', target: 'lambda', label: 'trigger' },
+        { id: 'e3', source: 'lambda', target: 'rekog', label: 'DetectLabels' },
+        { id: 'e4', source: 'rekog', target: 's3', label: 'write tags' },
+      ],
+    },
+  },
+
+  // ── 09 Multi-env Deployment ───────────────────────────────────────────────
+  {
+    slug: '09-multi-env-deployment',
+    number: 9,
+    title: 'Multi-Env Deployment',
+    difficulty: 'Advanced',
+    tooling: 'Terraform',
+    description: 'Node + Postgres app deployed across dev and prod environments using Terraform Workspaces and Route 53.',
+    services: ['VPC', 'EC2', 'RDS', 'Route 53', 'Terraform Workspaces'],
+    goal: 'Deploy the same Node.js + Postgres application across isolated dev and prod environments using Terraform Workspaces. Route 53 routes traffic to the correct ALB per environment with environment-specific DNS names.',
+    whatYouLearn: [
+      'Terraform Workspaces — how they map to environment isolation',
+      'Terraform variable files per environment (dev.tfvars, prod.tfvars)',
+      'Route 53 hosted zones and A-record aliases pointing at EC2/ALB',
+      'RDS parameter groups and why prod should differ from dev',
+    ],
+    diagram: {
+      nodes: [
+        { id: 'dns', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Route 53', icon: SiAmazonaws, category: 'networking' } },
+        { id: 'ec2', type: 'service', position: { x: 220, y: 120 }, data: { label: 'EC2 (Node.js)', icon: SiAmazonec2, category: 'compute' } },
+        { id: 'rds', type: 'service', position: { x: 440, y: 120 }, data: { label: 'RDS (Postgres)', icon: SiAmazonaws, category: 'storage' } },
+      ],
+      edges: [
+        { id: 'e1', source: 'dns', target: 'ec2', label: 'A record' },
+        { id: 'e2', source: 'ec2', target: 'rds', label: 'query' },
+      ],
+    },
+  },
+
+  // ── 10 Containerized Microservice ─────────────────────────────────────────
+  {
+    slug: '10-containerized-microservice',
+    number: 10,
+    title: 'Containerized Microservice',
+    difficulty: 'Advanced',
+    tooling: 'Terraform',
+    description: 'Dockerized Node.js service on ECS Fargate behind an Application Load Balancer, image stored in ECR.',
+    services: ['ECS Fargate', 'ECR', 'ALB', 'VPC', 'IAM', 'CloudWatch Logs'],
+    goal: 'Ship a Dockerized Node.js service on ECS Fargate behind an ALB. The container image is stored in ECR. Terraform provisions everything: VPC, ECR, ECS cluster + service + task definition, and ALB with health checks.',
+    whatYouLearn: [
+      'ECS task definition vs. service vs. cluster — the mental model',
+      'Task execution role (pull image, write logs) vs. task role (app-level AWS calls)',
+      'ALB target groups and health checks driving zero-downtime deploys',
+      'Fargate pricing model vs. EC2-backed ECS',
+    ],
+    diagram: {
+      nodes: [
+        { id: 'internet', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Internet', icon: SiAmazonaws, category: 'client' } },
+        { id: 'alb', type: 'service', position: { x: 220, y: 120 }, data: { label: 'ALB', icon: SiAmazonaws, category: 'networking' } },
+        { id: 'ecs', type: 'service', position: { x: 440, y: 120 }, data: { label: 'ECS Fargate', icon: SiAmazonaws, category: 'compute' } },
+        { id: 'ecr', type: 'service', position: { x: 660, y: 0 }, data: { label: 'ECR', icon: SiAmazonaws, category: 'storage' } },
+        { id: 'cw', type: 'service', position: { x: 660, y: 240 }, data: { label: 'CloudWatch', icon: SiAmazonaws, category: 'observability' } },
+      ],
+      edges: [
+        { id: 'e1', source: 'internet', target: 'alb' },
+        { id: 'e2', source: 'alb', target: 'ecs', label: 'route' },
+        { id: 'e3', source: 'ecs', target: 'ecr', label: 'pull image' },
+        { id: 'e4', source: 'ecs', target: 'cw', label: 'logs' },
+      ],
+    },
+  },
+
+  // ── 11 Realtime Notifications ─────────────────────────────────────────────
+  {
+    slug: '11-realtime-notifications',
+    number: 11,
+    title: 'Realtime Notifications',
+    difficulty: 'Advanced',
+    tooling: 'Terraform',
+    description: 'Live push updates to connected clients via API Gateway WebSockets, Lambda, and DynamoDB connection store.',
+    services: ['API Gateway WebSockets', 'Lambda', 'DynamoDB'],
+    goal: 'Push real-time updates to connected browser clients using API Gateway WebSockets. Lambda handles connect/disconnect/message routes. DynamoDB stores active connection IDs so any Lambda invocation can broadcast to all connected clients.',
+    whatYouLearn: [
+      'API Gateway WebSocket routes: $connect, $disconnect, $default',
+      'How to broadcast to multiple connections from Lambda',
+      'Connection ID lifecycle and stale connection cleanup',
+      'WebSockets vs. Server-Sent Events vs. polling — when to use each',
+    ],
+    diagram: {
+      nodes: [
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
+        { id: 'apigw', type: 'service', position: { x: 220, y: 120 }, data: { label: 'API GW (WS)', icon: SiAmazonaws, category: 'networking' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: SiAwslambda, category: 'compute' } },
+        { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: SiAmazondynamodb, category: 'storage' } },
+      ],
+      edges: [
+        { id: 'e1', source: 'client', target: 'apigw', label: 'ws connect' },
+        { id: 'e2', source: 'apigw', target: 'lambda', label: 'route' },
+        { id: 'e3', source: 'lambda', target: 'dynamo', label: 'store connectionId' },
+        { id: 'e4', source: 'lambda', target: 'apigw', label: 'postToConnection' },
+      ],
+    },
+  },
+
+  // ── 12 Observability Dashboard ────────────────────────────────────────────
+  {
+    slug: '12-observability-dashboard',
+    number: 12,
+    title: 'Observability Dashboard',
+    difficulty: 'Advanced',
+    tooling: 'Terraform',
+    description: 'Structured logging, distributed tracing with X-Ray, CloudWatch metrics, and SNS alerting across a live service.',
+    services: ['CloudWatch', 'X-Ray', 'SNS'],
+    goal: 'Instrument a live service with structured logging, distributed tracing (X-Ray), CloudWatch metrics, and alarm-driven SNS alerting. Provides the observability foundation for any production workload.',
+    whatYouLearn: [
+      'Structured JSON logs vs. text logs — why parseable logs matter',
+      'X-Ray trace segments, subsegments, and sampling rules',
+      'CloudWatch metric filters — turning log patterns into metrics',
+      'Alarm → SNS → email/PagerDuty notification chain',
+    ],
+    diagram: {
+      nodes: [
+        { id: 'svc', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Service', icon: SiAmazonaws, category: 'compute' } },
+        { id: 'cw', type: 'service', position: { x: 220, y: 0 }, data: { label: 'CloudWatch', icon: SiAmazonaws, category: 'observability' } },
+        { id: 'xray', type: 'service', position: { x: 220, y: 240 }, data: { label: 'X-Ray', icon: SiAmazonaws, category: 'observability' } },
+        { id: 'sns', type: 'service', position: { x: 440, y: 0 }, data: { label: 'SNS', icon: SiAmazonaws, category: 'messaging' } },
+        { id: 'alert', type: 'service', position: { x: 660, y: 0 }, data: { label: 'Alert Subscriber', icon: SiAmazonaws, category: 'client' } },
+      ],
+      edges: [
+        { id: 'e1', source: 'svc', target: 'cw', label: 'metrics/logs' },
+        { id: 'e2', source: 'svc', target: 'xray', label: 'traces' },
+        { id: 'e3', source: 'cw', target: 'sns', label: 'alarm' },
+        { id: 'e4', source: 'sns', target: 'alert', label: 'notify' },
+      ],
+    },
+  },
+
+  // ── 13 Secrets & Orchestration ────────────────────────────────────────────
+  {
+    slug: '13-secrets-and-orchestration',
+    number: 13,
+    title: 'Secrets & Orchestration',
+    difficulty: 'Advanced',
+    tooling: 'Terraform',
+    description: 'Multi-step workflow via Step Functions with proper secrets handling via Secrets Manager and Parameter Store.',
+    services: ['Secrets Manager', 'Parameter Store', 'Step Functions', 'Lambda'],
+    goal: 'Build a multi-step workflow using Step Functions where each Lambda step fetches runtime secrets from Secrets Manager and configuration from Parameter Store — no secrets in environment variables or code.',
+    whatYouLearn: [
+      'Step Functions state machine definition — Task, Choice, Wait, Parallel states',
+      'Secrets Manager vs. Parameter Store — rotation, cost, use cases',
+      'IAM resource-based policies for Step Functions → Lambda invocation',
+      'Error handling and retries in state machine definitions',
+    ],
+    diagram: {
+      nodes: [
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
+        { id: 'sfn', type: 'service', position: { x: 220, y: 120 }, data: { label: 'Step Functions', icon: SiAmazonaws, category: 'compute' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda (steps)', icon: SiAwslambda, category: 'compute' } },
+        { id: 'sm', type: 'service', position: { x: 660, y: 0 }, data: { label: 'Secrets Manager', icon: SiAmazonaws, category: 'security' } },
+        { id: 'ps', type: 'service', position: { x: 660, y: 240 }, data: { label: 'Parameter Store', icon: SiAmazonaws, category: 'security' } },
+      ],
+      edges: [
+        { id: 'e1', source: 'client', target: 'sfn', label: 'start execution' },
+        { id: 'e2', source: 'sfn', target: 'lambda', label: 'invoke step' },
+        { id: 'e3', source: 'lambda', target: 'sm', label: 'get secret' },
+        { id: 'e4', source: 'lambda', target: 'ps', label: 'get config' },
+      ],
+    },
+  },
 ]
