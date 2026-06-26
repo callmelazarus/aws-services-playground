@@ -2,7 +2,25 @@
 
 import { Handle, Position } from '@xyflow/react'
 import type { NodeProps } from '@xyflow/react'
-import type { ServiceNodeData } from '@/types/project'
+import type { ServiceNodeData, IconKey } from '@/types/project'
+import {
+  SiAmazonaws,
+  SiAmazons3,
+  SiAwslambda,
+  SiAmazondynamodb,
+  SiAmazonec2,
+  SiAmazonsqs,
+} from 'react-icons/si'
+import type { ComponentType } from 'react'
+
+const iconMap: Record<IconKey, ComponentType<{ className?: string }>> = {
+  SiAmazonaws,
+  SiAmazons3,
+  SiAwslambda,
+  SiAmazondynamodb,
+  SiAmazonec2,
+  SiAmazonsqs,
+}
 
 const categoryStyles: Record<string, string> = {
   compute:      'bg-amber-950 border-amber-500 text-amber-200',
@@ -16,7 +34,7 @@ const categoryStyles: Record<string, string> = {
 
 export function ServiceNode({ data }: NodeProps) {
   const nodeData = data as ServiceNodeData
-  const Icon = nodeData.icon
+  const Icon = iconMap[nodeData.icon]
   const styles = categoryStyles[nodeData.category] ?? categoryStyles['client']
   return (
     <>

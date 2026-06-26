@@ -1,11 +1,3 @@
-import {
-  SiAmazons3,
-  SiAwslambda,
-  SiAmazondynamodb,
-  SiAmazonec2,
-  SiAmazonsqs,
-  SiAmazonaws,
-} from 'react-icons/si'
 import type { Project } from '@/types/project'
 
 export const projects: Project[] = [
@@ -26,9 +18,9 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'user', type: 'service', position: { x: 0, y: 100 }, data: { label: 'User', icon: SiAmazonaws, category: 'client' } },
-        { id: 'cf', type: 'service', position: { x: 220, y: 100 }, data: { label: 'CloudFront', icon: SiAmazonaws, category: 'networking' } },
-        { id: 's3', type: 'service', position: { x: 440, y: 100 }, data: { label: 'S3', icon: SiAmazons3, category: 'storage' } },
+        { id: 'user', type: 'service', position: { x: 0, y: 100 }, data: { label: 'User', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'cf', type: 'service', position: { x: 220, y: 100 }, data: { label: 'CloudFront', icon: 'SiAmazonaws', category: 'networking' } },
+        { id: 's3', type: 'service', position: { x: 440, y: 100 }, data: { label: 'S3', icon: 'SiAmazons3', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'user', target: 'cf', label: 'HTTPS' },
@@ -54,11 +46,11 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
-        { id: 's3', type: 'service', position: { x: 220, y: 120 }, data: { label: 'S3', icon: SiAmazons3, category: 'storage' } },
-        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: SiAwslambda, category: 'compute' } },
-        { id: 'sns', type: 'service', position: { x: 660, y: 0 }, data: { label: 'SNS', icon: SiAmazonaws, category: 'messaging' } },
-        { id: 'sub', type: 'service', position: { x: 880, y: 0 }, data: { label: 'Subscriber', icon: SiAmazonaws, category: 'client' } },
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 's3', type: 'service', position: { x: 220, y: 120 }, data: { label: 'S3', icon: 'SiAmazons3', category: 'storage' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: 'SiAwslambda', category: 'compute' } },
+        { id: 'sns', type: 'service', position: { x: 660, y: 0 }, data: { label: 'SNS', icon: 'SiAmazonaws', category: 'messaging' } },
+        { id: 'sub', type: 'service', position: { x: 880, y: 0 }, data: { label: 'Subscriber', icon: 'SiAmazonaws', category: 'client' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 's3', label: 'upload' },
@@ -87,10 +79,10 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
-        { id: 'ec2', type: 'service', position: { x: 220, y: 120 }, data: { label: 'EC2 (Node.js)', icon: SiAmazonec2, category: 'compute' } },
-        { id: 'redis', type: 'service', position: { x: 440, y: 0 }, data: { label: 'ElastiCache', icon: SiAmazonaws, category: 'storage' } },
-        { id: 'rds', type: 'service', position: { x: 440, y: 240 }, data: { label: 'RDS (Postgres)', icon: SiAmazonaws, category: 'storage' } },
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'ec2', type: 'service', position: { x: 220, y: 120 }, data: { label: 'EC2 (Node.js)', icon: 'SiAmazonec2', category: 'compute' } },
+        { id: 'redis', type: 'service', position: { x: 440, y: 0 }, data: { label: 'ElastiCache', icon: 'SiAmazonaws', category: 'storage' } },
+        { id: 'rds', type: 'service', position: { x: 440, y: 240 }, data: { label: 'RDS (Postgres)', icon: 'SiAmazonaws', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 'ec2' },
@@ -118,10 +110,10 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
-        { id: 'apigw', type: 'service', position: { x: 220, y: 120 }, data: { label: 'API Gateway', icon: SiAmazonaws, category: 'networking' } },
-        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: SiAwslambda, category: 'compute' } },
-        { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: SiAmazondynamodb, category: 'storage' } },
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'apigw', type: 'service', position: { x: 220, y: 120 }, data: { label: 'API Gateway', icon: 'SiAmazonaws', category: 'networking' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: 'SiAwslambda', category: 'compute' } },
+        { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: 'SiAmazondynamodb', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 'apigw', label: 'REST' },
@@ -149,10 +141,10 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
-        { id: 'cognito', type: 'service', position: { x: 220, y: 0 }, data: { label: 'Cognito', icon: SiAmazonaws, category: 'security' } },
-        { id: 'apigw', type: 'service', position: { x: 220, y: 240 }, data: { label: 'API Gateway', icon: SiAmazonaws, category: 'networking' } },
-        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: SiAwslambda, category: 'compute' } },
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'cognito', type: 'service', position: { x: 220, y: 0 }, data: { label: 'Cognito', icon: 'SiAmazonaws', category: 'security' } },
+        { id: 'apigw', type: 'service', position: { x: 220, y: 240 }, data: { label: 'API Gateway', icon: 'SiAmazonaws', category: 'networking' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: 'SiAwslambda', category: 'compute' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 'cognito', label: 'authenticate' },
@@ -180,10 +172,10 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
-        { id: 'sqs', type: 'service', position: { x: 220, y: 120 }, data: { label: 'SQS', icon: SiAmazonsqs, category: 'messaging' } },
-        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda (worker)', icon: SiAwslambda, category: 'compute' } },
-        { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: SiAmazondynamodb, category: 'storage' } },
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'sqs', type: 'service', position: { x: 220, y: 120 }, data: { label: 'SQS', icon: 'SiAmazonsqs', category: 'messaging' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda (worker)', icon: 'SiAwslambda', category: 'compute' } },
+        { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: 'SiAmazondynamodb', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 'sqs', label: 'enqueue' },
@@ -211,10 +203,10 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'producer', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Producer', icon: SiAmazonaws, category: 'client' } },
-        { id: 'kinesis', type: 'service', position: { x: 220, y: 120 }, data: { label: 'Kinesis', icon: SiAmazonaws, category: 'messaging' } },
-        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: SiAwslambda, category: 'compute' } },
-        { id: 's3', type: 'service', position: { x: 660, y: 120 }, data: { label: 'S3', icon: SiAmazons3, category: 'storage' } },
+        { id: 'producer', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Producer', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'kinesis', type: 'service', position: { x: 220, y: 120 }, data: { label: 'Kinesis', icon: 'SiAmazonaws', category: 'messaging' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: 'SiAwslambda', category: 'compute' } },
+        { id: 's3', type: 'service', position: { x: 660, y: 120 }, data: { label: 'S3', icon: 'SiAmazons3', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'producer', target: 'kinesis', label: 'put records' },
@@ -242,10 +234,10 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
-        { id: 's3', type: 'service', position: { x: 220, y: 120 }, data: { label: 'S3', icon: SiAmazons3, category: 'storage' } },
-        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: SiAwslambda, category: 'compute' } },
-        { id: 'rekog', type: 'service', position: { x: 660, y: 120 }, data: { label: 'Rekognition', icon: SiAmazonaws, category: 'compute' } },
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 's3', type: 'service', position: { x: 220, y: 120 }, data: { label: 'S3', icon: 'SiAmazons3', category: 'storage' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: 'SiAwslambda', category: 'compute' } },
+        { id: 'rekog', type: 'service', position: { x: 660, y: 120 }, data: { label: 'Rekognition', icon: 'SiAmazonaws', category: 'compute' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 's3', label: 'upload image' },
@@ -274,9 +266,9 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'dns', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Route 53', icon: SiAmazonaws, category: 'networking' } },
-        { id: 'ec2', type: 'service', position: { x: 220, y: 120 }, data: { label: 'EC2 (Node.js)', icon: SiAmazonec2, category: 'compute' } },
-        { id: 'rds', type: 'service', position: { x: 440, y: 120 }, data: { label: 'RDS (Postgres)', icon: SiAmazonaws, category: 'storage' } },
+        { id: 'dns', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Route 53', icon: 'SiAmazonaws', category: 'networking' } },
+        { id: 'ec2', type: 'service', position: { x: 220, y: 120 }, data: { label: 'EC2 (Node.js)', icon: 'SiAmazonec2', category: 'compute' } },
+        { id: 'rds', type: 'service', position: { x: 440, y: 120 }, data: { label: 'RDS (Postgres)', icon: 'SiAmazonaws', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'dns', target: 'ec2', label: 'A record' },
@@ -303,11 +295,11 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'internet', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Internet', icon: SiAmazonaws, category: 'client' } },
-        { id: 'alb', type: 'service', position: { x: 220, y: 120 }, data: { label: 'ALB', icon: SiAmazonaws, category: 'networking' } },
-        { id: 'ecs', type: 'service', position: { x: 440, y: 120 }, data: { label: 'ECS Fargate', icon: SiAmazonaws, category: 'compute' } },
-        { id: 'ecr', type: 'service', position: { x: 660, y: 0 }, data: { label: 'ECR', icon: SiAmazonaws, category: 'storage' } },
-        { id: 'cw', type: 'service', position: { x: 660, y: 240 }, data: { label: 'CloudWatch', icon: SiAmazonaws, category: 'observability' } },
+        { id: 'internet', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Internet', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'alb', type: 'service', position: { x: 220, y: 120 }, data: { label: 'ALB', icon: 'SiAmazonaws', category: 'networking' } },
+        { id: 'ecs', type: 'service', position: { x: 440, y: 120 }, data: { label: 'ECS Fargate', icon: 'SiAmazonaws', category: 'compute' } },
+        { id: 'ecr', type: 'service', position: { x: 660, y: 0 }, data: { label: 'ECR', icon: 'SiAmazonaws', category: 'storage' } },
+        { id: 'cw', type: 'service', position: { x: 660, y: 240 }, data: { label: 'CloudWatch', icon: 'SiAmazonaws', category: 'observability' } },
       ],
       edges: [
         { id: 'e1', source: 'internet', target: 'alb' },
@@ -336,10 +328,10 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
-        { id: 'apigw', type: 'service', position: { x: 220, y: 120 }, data: { label: 'API GW (WS)', icon: SiAmazonaws, category: 'networking' } },
-        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: SiAwslambda, category: 'compute' } },
-        { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: SiAmazondynamodb, category: 'storage' } },
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'apigw', type: 'service', position: { x: 220, y: 120 }, data: { label: 'API GW (WS)', icon: 'SiAmazonaws', category: 'networking' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: 'SiAwslambda', category: 'compute' } },
+        { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: 'SiAmazondynamodb', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 'apigw', label: 'ws connect' },
@@ -368,11 +360,11 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'svc', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Service', icon: SiAmazonaws, category: 'compute' } },
-        { id: 'cw', type: 'service', position: { x: 220, y: 0 }, data: { label: 'CloudWatch', icon: SiAmazonaws, category: 'observability' } },
-        { id: 'xray', type: 'service', position: { x: 220, y: 240 }, data: { label: 'X-Ray', icon: SiAmazonaws, category: 'observability' } },
-        { id: 'sns', type: 'service', position: { x: 440, y: 0 }, data: { label: 'SNS', icon: SiAmazonaws, category: 'messaging' } },
-        { id: 'alert', type: 'service', position: { x: 660, y: 0 }, data: { label: 'Alert Subscriber', icon: SiAmazonaws, category: 'client' } },
+        { id: 'svc', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Service', icon: 'SiAmazonaws', category: 'compute' } },
+        { id: 'cw', type: 'service', position: { x: 220, y: 0 }, data: { label: 'CloudWatch', icon: 'SiAmazonaws', category: 'observability' } },
+        { id: 'xray', type: 'service', position: { x: 220, y: 240 }, data: { label: 'X-Ray', icon: 'SiAmazonaws', category: 'observability' } },
+        { id: 'sns', type: 'service', position: { x: 440, y: 0 }, data: { label: 'SNS', icon: 'SiAmazonaws', category: 'messaging' } },
+        { id: 'alert', type: 'service', position: { x: 660, y: 0 }, data: { label: 'Alert Subscriber', icon: 'SiAmazonaws', category: 'client' } },
       ],
       edges: [
         { id: 'e1', source: 'svc', target: 'cw', label: 'metrics/logs' },
@@ -401,11 +393,11 @@ export const projects: Project[] = [
     ],
     diagram: {
       nodes: [
-        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: SiAmazonaws, category: 'client' } },
-        { id: 'sfn', type: 'service', position: { x: 220, y: 120 }, data: { label: 'Step Functions', icon: SiAmazonaws, category: 'compute' } },
-        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda (steps)', icon: SiAwslambda, category: 'compute' } },
-        { id: 'sm', type: 'service', position: { x: 660, y: 0 }, data: { label: 'Secrets Manager', icon: SiAmazonaws, category: 'security' } },
-        { id: 'ps', type: 'service', position: { x: 660, y: 240 }, data: { label: 'Parameter Store', icon: SiAmazonaws, category: 'security' } },
+        { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
+        { id: 'sfn', type: 'service', position: { x: 220, y: 120 }, data: { label: 'Step Functions', icon: 'SiAmazonaws', category: 'compute' } },
+        { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda (steps)', icon: 'SiAwslambda', category: 'compute' } },
+        { id: 'sm', type: 'service', position: { x: 660, y: 0 }, data: { label: 'Secrets Manager', icon: 'SiAmazonaws', category: 'security' } },
+        { id: 'ps', type: 'service', position: { x: 660, y: 240 }, data: { label: 'Parameter Store', icon: 'SiAmazonaws', category: 'security' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 'sfn', label: 'start execution' },

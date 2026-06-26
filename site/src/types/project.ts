@@ -9,9 +9,17 @@ export type ServiceCategory =
   | 'observability'
   | 'client'
 
+export type IconKey =
+  | 'SiAmazonaws'
+  | 'SiAmazons3'
+  | 'SiAwslambda'
+  | 'SiAmazondynamodb'
+  | 'SiAmazonec2'
+  | 'SiAmazonsqs'
+
 export type ServiceNodeData = {
   label: string
-  icon: React.ComponentType<{ className?: string }>
+  icon: IconKey
   category: ServiceCategory
 }
 
