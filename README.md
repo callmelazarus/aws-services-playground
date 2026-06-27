@@ -1,8 +1,12 @@
 # aws-services-playground
 
+**Live site:** [aws-services-playground.vercel.app](https://aws-services-playground.vercel.app/)
+
 A hands-on portfolio of 13 AWS projects built to reinforce the knowledge from the **AWS Certified Developer – Associate** certification, develop system-design intuition, and prepare for re-certification. Every project is written in **Node.js / TypeScript** and ships as a self-contained subdirectory with its own README, architecture notes, and setup steps.
 
 The tooling deliberately progresses from raw AWS CLI → AWS SAM → Terraform, mirroring how an engineer grows on the job: you start by learning what the services *are*, then learn to model serverless applications declaratively, then graduate to full infrastructure-as-code across environments.
+
+The portfolio site (`site/`) is a Next.js 15 app that renders each project as an interactive React Flow architecture diagram. It is statically generated at build time from the typed project data in `site/src/data/projects.ts` and deployed to Vercel.
 
 ---
 
@@ -52,7 +56,18 @@ Every project uses **Node.js + TypeScript** — Lambda handlers, EC2 servers, co
 
 ## How to Use This Repo
 
-1. Walk the projects in order. Each one introduces new services and reuses earlier patterns.
-2. Read the per-project README before touching any code — the architecture diagram and AWS services section are the study material.
-3. Tear down resources after each project. Billing alerts > surprises.
-4. Come back to this roadmap periodically. Projects are living documents; revisit to upgrade with new services or patterns.
+1. Browse the projects at [aws-services-playground.vercel.app](https://aws-services-playground.vercel.app/) — each card links to an interactive architecture diagram.
+2. Walk the projects in order in this repo. Each one introduces new services and reuses earlier patterns.
+3. Read the per-project README before touching any code — the architecture diagram and AWS services section are the study material.
+4. Tear down resources after each project. Billing alerts > surprises.
+5. Come back to this roadmap periodically. Projects are living documents; revisit to upgrade with new services or patterns.
+
+## Running the Portfolio Site Locally
+
+```bash
+cd site
+npm install
+npm run dev   # http://localhost:3000
+npm test      # 5 data integrity tests
+npm run build # production build — verifies all 13 routes pre-render
+```
