@@ -64,6 +64,19 @@ export default async function ProjectPage({ params }: Props) {
             ))}
           </ul>
         </div>
+
+        <div className="mt-auto pt-2">
+          <h2 className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2">Reference</h2>
+          <a
+            href={project.reference.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sky-400 text-sm hover:text-sky-300 transition-colors inline-flex gap-1.5 leading-relaxed"
+          >
+            <span>{project.reference.label}</span>
+            <span aria-hidden className="text-slate-500">↗</span>
+          </a>
+        </div>
       </aside>
 
       {/* Right panel — diagram */}

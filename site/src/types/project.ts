@@ -33,6 +33,11 @@ export type Project = {
   services: string[]
   goal: string
   whatYouLearn: string[]
+  /** Official AWS (or tooling) reference architecture / docs this diagram is modeled on. */
+  reference: {
+    label: string
+    url: string
+  }
   diagram: {
     nodes: Node<ServiceNodeData>[]
     edges: Edge[]

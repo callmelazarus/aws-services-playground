@@ -16,6 +16,10 @@ export const projects: Project[] = [
       'CloudFront distribution config: origins, behaviors, TTLs',
       'Why invalidations matter and how caching surprises you',
     ],
+    reference: {
+      label: 'AWS — Get started with a secure static website (CloudFront + S3 + OAC)',
+      url: 'https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/getting-started-secure-static-website-cloudformation-template.html',
+    },
     diagram: {
       nodes: [
         { id: 'user', type: 'service', position: { x: 0, y: 100 }, data: { label: 'User', icon: 'SiAmazonaws', category: 'client' } },
@@ -44,6 +48,10 @@ export const projects: Project[] = [
       'SNS topics, subscriptions, and fan-out pattern',
       'Lambda execution role scoping for S3 and SNS access',
     ],
+    reference: {
+      label: 'AWS Architecture Blog — Amazon S3 event-driven design patterns',
+      url: 'https://aws.amazon.com/blogs/architecture/get-started-with-amazon-s3-event-driven-design-patterns/',
+    },
     diagram: {
       nodes: [
         { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
@@ -77,6 +85,10 @@ export const projects: Project[] = [
       'Connection pooling patterns for Lambda vs. EC2',
       'Why ElastiCache dramatically reduces RDS read load',
     ],
+    reference: {
+      label: 'AWS Architecture Blog — Building a three-tier architecture',
+      url: 'https://aws.amazon.com/blogs/architecture/building-a-three-tier-architecture-on-a-budget/',
+    },
     diagram: {
       nodes: [
         { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
@@ -108,6 +120,10 @@ export const projects: Project[] = [
       'DynamoDB access patterns — design around access pattern, not entity',
       'Local iteration with sam local start-api',
     ],
+    reference: {
+      label: 'AWS — Tutorial: Using Lambda with API Gateway (CRUD + DynamoDB)',
+      url: 'https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway-tutorial.html',
+    },
     diagram: {
       nodes: [
         { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
@@ -131,7 +147,7 @@ export const projects: Project[] = [
     difficulty: 'Intermediate',
     tooling: 'AWS SAM',
     description: 'Adds Cognito JWT-based authentication to the serverless REST API from project 04.',
-    services: ['Cognito', 'API Gateway', 'Lambda'],
+    services: ['Cognito', 'API Gateway', 'Lambda', 'DynamoDB'],
     goal: 'Add JWT-based authentication to the serverless REST API (project 04) using Amazon Cognito. The client authenticates with Cognito to get a JWT, then passes it as a Bearer token on every API request. API Gateway validates the token before invoking Lambda.',
     whatYouLearn: [
       'Cognito User Pools vs. Identity Pools',
@@ -139,17 +155,23 @@ export const projects: Project[] = [
       'JWT claims and how to use them inside Lambda handlers',
       'CORS preflight handling with an authorizer in place',
     ],
+    reference: {
+      label: 'AWS — Control access to REST APIs using Amazon Cognito user pools',
+      url: 'https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html',
+    },
     diagram: {
       nodes: [
         { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
         { id: 'cognito', type: 'service', position: { x: 220, y: 0 }, data: { label: 'Cognito', icon: 'SiAmazonaws', category: 'security' } },
         { id: 'apigw', type: 'service', position: { x: 220, y: 240 }, data: { label: 'API Gateway', icon: 'SiAmazonaws', category: 'networking' } },
         { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda', icon: 'SiAwslambda', category: 'compute' } },
+        { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: 'SiAmazondynamodb', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 'cognito', label: 'authenticate' },
         { id: 'e2', source: 'client', target: 'apigw', label: 'JWT Bearer' },
         { id: 'e3', source: 'apigw', target: 'lambda', label: 'authorized' },
+        { id: 'e4', source: 'lambda', target: 'dynamo', label: 'CRUD (scoped by sub)' },
       ],
     },
   },
@@ -170,17 +192,23 @@ export const projects: Project[] = [
       'Dead-letter queues for unprocessable messages',
       'Idempotency — why job handlers must be safe to run twice',
     ],
+    reference: {
+      label: 'AWS — Creating and configuring an Amazon SQS event source mapping',
+      url: 'https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-configure.html',
+    },
     diagram: {
       nodes: [
         { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
         { id: 'sqs', type: 'service', position: { x: 220, y: 120 }, data: { label: 'SQS', icon: 'SiAmazonsqs', category: 'messaging' } },
+        { id: 'dlq', type: 'service', position: { x: 220, y: 300 }, data: { label: 'SQS DLQ', icon: 'SiAmazonsqs', category: 'messaging' } },
         { id: 'lambda', type: 'service', position: { x: 440, y: 120 }, data: { label: 'Lambda (worker)', icon: 'SiAwslambda', category: 'compute' } },
         { id: 'dynamo', type: 'service', position: { x: 660, y: 120 }, data: { label: 'DynamoDB', icon: 'SiAmazondynamodb', category: 'storage' } },
       ],
       edges: [
         { id: 'e1', source: 'client', target: 'sqs', label: 'enqueue' },
-        { id: 'e2', source: 'sqs', target: 'lambda', label: 'trigger' },
+        { id: 'e2', source: 'sqs', target: 'lambda', label: 'poll batch' },
         { id: 'e3', source: 'lambda', target: 'dynamo', label: 'update status' },
+        { id: 'e4', source: 'sqs', target: 'dlq', label: 'maxReceiveCount exceeded' },
       ],
     },
   },
@@ -201,6 +229,10 @@ export const projects: Project[] = [
       'At-least-once delivery and how to handle duplicates',
       'Kinesis vs. SQS — when to use each',
     ],
+    reference: {
+      label: 'AWS — Using Lambda to process records from Amazon Kinesis Data Streams',
+      url: 'https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html',
+    },
     diagram: {
       nodes: [
         { id: 'producer', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Producer', icon: 'SiAmazonaws', category: 'client' } },
@@ -232,6 +264,10 @@ export const projects: Project[] = [
       'Async event-driven processing vs. synchronous request/response',
       'IAM least-privilege for cross-service Lambda calls',
     ],
+    reference: {
+      label: 'AWS — Using Amazon Rekognition and Lambda to tag assets in an S3 bucket',
+      url: 'https://docs.aws.amazon.com/rekognition/latest/dg/images-lambda-s3-tutorial.html',
+    },
     diagram: {
       nodes: [
         { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
@@ -243,7 +279,8 @@ export const projects: Project[] = [
         { id: 'e1', source: 'client', target: 's3', label: 'upload image' },
         { id: 'e2', source: 's3', target: 'lambda', label: 'trigger' },
         { id: 'e3', source: 'lambda', target: 'rekog', label: 'DetectLabels' },
-        { id: 'e4', source: 'rekog', target: 's3', label: 'write tags' },
+        { id: 'e4', source: 'rekog', target: 'lambda', label: 'labels' },
+        { id: 'e5', source: 'lambda', target: 's3', label: 'write tags' },
       ],
     },
   },
@@ -257,13 +294,17 @@ export const projects: Project[] = [
     tooling: 'Terraform',
     description: 'Node + Postgres app deployed across dev and prod environments using Terraform Workspaces and Route 53.',
     services: ['VPC', 'EC2', 'RDS', 'Route 53', 'Terraform Workspaces'],
-    goal: 'Deploy the same Node.js + Postgres application across isolated dev and prod environments using Terraform Workspaces. Route 53 routes traffic to the correct ALB per environment with environment-specific DNS names.',
+    goal: 'Deploy the same Node.js + Postgres application across isolated dev and prod environments using Terraform Workspaces. Route 53 routes traffic to the correct EC2 instance per environment with environment-specific DNS names.',
     whatYouLearn: [
       'Terraform Workspaces — how they map to environment isolation',
       'Terraform variable files per environment (dev.tfvars, prod.tfvars)',
       'Route 53 hosted zones and A-record aliases pointing at EC2/ALB',
       'RDS parameter groups and why prod should differ from dev',
     ],
+    reference: {
+      label: 'Terraform — Manage workspaces (environment isolation)',
+      url: 'https://developer.hashicorp.com/terraform/cli/workspaces',
+    },
     diagram: {
       nodes: [
         { id: 'dns', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Route 53', icon: 'SiAmazonaws', category: 'networking' } },
@@ -293,6 +334,10 @@ export const projects: Project[] = [
       'ALB target groups and health checks driving zero-downtime deploys',
       'Fargate pricing model vs. EC2-backed ECS',
     ],
+    reference: {
+      label: 'AWS — Use an Application Load Balancer for Amazon ECS',
+      url: 'https://docs.aws.amazon.com/AmazonECS/latest/developerguide/alb.html',
+    },
     diagram: {
       nodes: [
         { id: 'internet', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Internet', icon: 'SiAmazonaws', category: 'client' } },
@@ -326,6 +371,10 @@ export const projects: Project[] = [
       'Connection ID lifecycle and stale connection cleanup',
       'WebSockets vs. Server-Sent Events vs. polling — when to use each',
     ],
+    reference: {
+      label: 'AWS — WebSocket chat app with API Gateway, Lambda and DynamoDB',
+      url: 'https://docs.aws.amazon.com/apigateway/latest/developerguide/websocket-api-chat-app.html',
+    },
     diagram: {
       nodes: [
         { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },
@@ -358,6 +407,10 @@ export const projects: Project[] = [
       'CloudWatch metric filters — turning log patterns into metrics',
       'Alarm → SNS → email/PagerDuty notification chain',
     ],
+    reference: {
+      label: 'AWS — Notify with CloudWatch + SNS when X-Ray detects latency, errors, faults',
+      url: 'https://aws.amazon.com/blogs/devops/using-amazon-cloudwatch-and-amazon-sns-to-notify-when-aws-x-ray-detects-elevated-levels-of-latency-errors-and-faults-in-your-application/',
+    },
     diagram: {
       nodes: [
         { id: 'svc', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Service', icon: 'SiAmazonaws', category: 'compute' } },
@@ -391,6 +444,10 @@ export const projects: Project[] = [
       'IAM resource-based policies for Step Functions → Lambda invocation',
       'Error handling and retries in state machine definitions',
     ],
+    reference: {
+      label: 'AWS — Creating a Step Functions state machine that uses Lambda',
+      url: 'https://docs.aws.amazon.com/step-functions/latest/dg/tutorial-creating-lambda-state-machine.html',
+    },
     diagram: {
       nodes: [
         { id: 'client', type: 'service', position: { x: 0, y: 120 }, data: { label: 'Client', icon: 'SiAmazonaws', category: 'client' } },

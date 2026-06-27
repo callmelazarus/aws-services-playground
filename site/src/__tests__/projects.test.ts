@@ -36,4 +36,11 @@ describe('projects data', () => {
       expect(p.diagram.edges.length).toBeGreaterThan(0)
     }
   })
+
+  it('each project has a reference with a label and an https url', () => {
+    for (const p of projects) {
+      expect(p.reference.label, `${p.slug}: missing reference label`).toBeTruthy()
+      expect(p.reference.url, `${p.slug}: reference url must be https`).toMatch(/^https:\/\//)
+    }
+  })
 })
